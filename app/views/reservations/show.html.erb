@@ -1,0 +1,24 @@
+<% title "Reservation" %>
+
+<p>
+  <strong>Renter:</strong>
+  <%="#{@reservation.renter.first_name} #{@reservation.renter.last_name} (#{@reservation.renter.phone}) #{@reservation.renter.email}"%>
+</p>
+<p>
+  <strong>Manager:</strong>
+  <%=h @reservation.manager %>
+</p>
+<p>
+  <strong>Start:</strong>
+  <%=h @reservation.start_at %>
+</p>
+<p>
+  <strong>End:</strong>
+  <%=h @reservation.end_at %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_reservation_path(@reservation) %> |
+  <%= link_to "Destroy", @reservation, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", reservations_path %>
+</p>

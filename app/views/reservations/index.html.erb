@@ -1,0 +1,23 @@
+<% title "Reservations" %>
+
+<table>
+  <tr>
+    <th>Renter</th>
+    <th>Manager</th>
+    <th>Start</th>
+    <th>End</th>
+  </tr>
+  <% for reservation in @reservations %>
+    <tr>
+      <td><%= link_to("#{reservation.renter.first_name} #{reservation.renter.last_name}", user_path(reservation.renter)) %></td>
+      <td><%=h reservation.manager.first_name + " " + reservation.manager.last_name if reservation.manager %></td>
+      <td><%=h reservation.start_at %></td>
+      <td><%=h reservation.end_at %></td>
+      <td><%= link_to "Show", reservation %></td>
+      <td><%= link_to "Edit", edit_reservation_path(reservation) %></td>
+      <td><%= link_to "Destroy", reservation, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Reservation", new_reservation_path %></p>

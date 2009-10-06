@@ -1,0 +1,17 @@
+<% form_for @reservation do |f| %>
+  <%= f.error_messages %>
+  <h5>Sorry about the 24 hr time, I'll fix it eventually!</h5>
+  <p>
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start_at %>
+  </p>
+  <p>
+    <%= f.label :end %><br />
+    <%= f.datetime_select :end_at %>
+  </p>
+  <% if @current_user.admin %>
+    <%= f.label :Manager %><br />
+    <%= f.collection_select(:manager_id, User.admins, :id, :first_name) %>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

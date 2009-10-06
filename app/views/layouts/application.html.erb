@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= h(yield(:title) || "Untitled") %></title>
+    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag 'event_calendar' %>
+    <% javascript 'event_calendar' %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="container">
+    <p> <%= link_to "[Logout]", cas_logout_path %> </p>
+      <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <%- end -%>
+
+      <%- if show_title? -%>
+        <h1><%=h yield(:title) %></h1>
+      <%- end -%>
+
+      <%= yield %>
+    <p> The code on which this app runs is the copyrighted work of Michael Libertin and licensed under the terms on the <a href = "http://www.fsf.org/licensing/licenses/agpl-3.0.html">GNU Affero General Public License</a>. As such, you, the viewer of the site, are entitled to source code, which is available at <a href="http://github.com/iamringo/Calhoun-Kitchen">GitHub</a>.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<% title "Edit User" %>
+
+<% form_for @user do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+<% if @current_user.admin %>
+  <p>
+    <%= f.label :admin %><br />
+    <%= f.check_box :admin %>
+  </p>
+  <p>
+    <%= f.label :color %><br />
+    <%= f.text_field :color %>
+  </p>
+
+<% end %>
+  <p>
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
