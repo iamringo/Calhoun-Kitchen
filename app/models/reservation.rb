@@ -6,7 +6,7 @@ class Reservation < ActiveRecord::Base
   before_save :set_color
   validate :start_at_before_end_at
   validate :not_in_the_past
-  validate :no_overlap
+  validate_on_create :no_overlap
 
 private
   def set_color
