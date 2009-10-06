@@ -6,7 +6,7 @@ class Reservation < ActiveRecord::Base
   before_save :set_color
   validate :start_at_before_end_at
   validate :not_in_the_past
-  validate_on_create :no_overlap
+  validate :no_overlap
 
 private
   def set_color
@@ -27,7 +27,9 @@ private
 
   def no_overlap
     #inefficient as hell, but I am tired.
-    c = Reservation.all.select{|s| s.start_at < self.end_at && s.end_at > self.start_at}.length
-    errors.add_to_base("That time overlaps with someone else's reservation!") unless c.zero?
+    c = Reservation.all.select{|s| s.start_at < self.end_at && s.end_at > self.start_at}
+    unless c.length.zero?
+      errors.add_to_base("That time overlaps with someone else's reservation!") unless c.first.id == self.id
+    end
   end
 end

@@ -37,10 +37,20 @@ before_filter :permission_check, :except => ['new', 'create', 'index']
     @current_user = current_user
     @reservation = Reservation.find(params[:id])
     if @reservation.update_attributes(params[:reservation])
-      @reservation.manager = User.find(params[:reservation][:manager_id])
+      if current_user.admin
+        @reservation.manager = User.find(params[:reservation][:manager_id])
+        AppMailer.deliver_reservation_approved_notification!(@reservation)
+      else
+        @reservation.manager = nil
+        AppMailer.deliver_reservation_changed_notification!(@reservation)
+      end
       @reservation.save
       flash[:notice] = "Successfully updated reservation."
-      redirect_to @reservation
+      if current_user.admin
+        redirect_to @reservation
+      else
+        redirect_to root_url
+      end
     else
       render :action => 'edit'
     end
