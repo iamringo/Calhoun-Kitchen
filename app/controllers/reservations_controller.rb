@@ -17,7 +17,7 @@ before_filter :permission_check, :except => ['new', 'create', 'index']
     @current_user = current_user
     @reservation = Reservation.new(params[:reservation])
     @reservation.renter = current_user
-    @reservation.manager = User.find(params[:reservation][:manager_id])
+    @reservation.manager = User.find(params[:reservation][:manager_id]) if @reservation.manager
     if @reservation.save
       AppMailer.deliver_reservation_notification!(@reservation)
       flash[:notice] = "Successfully created reservation. "
