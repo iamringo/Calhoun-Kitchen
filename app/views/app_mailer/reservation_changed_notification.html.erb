@@ -1,0 +1,4 @@
+Hi,
+This is just to let you know that <%= @reservation.renter.first_name%> <%= @reservation.renter.last_name%> just changed their reservation for the kitchen. It's now from <%=@reservation.start_at.strftime("%a, %b %d, %I:%M %p")%> to <%=@reservation.end_at.strftime("%a, %b %d, %I:%M %p")%>. Go to cckitchen.heroku.com to check it out!
+-The kitchen app
+P.S. You can call <%= @reservation.renter.first_name%> <%= @reservation.renter.last_name%> at <%= @reservation.renter.phone%> or email them at <%= @reservation.renter.email%>
